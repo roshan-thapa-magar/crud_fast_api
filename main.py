@@ -3,9 +3,17 @@ from pydantic import BaseModel, EmailStr
 from typing import List
 import motor.motor_asyncio
 from bson import ObjectId
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
+# ✅ Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace "*" with specific domains in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # MongoDB connection
 client = motor.motor_asyncio.AsyncIOMotorClient(
     "mongodb+srv://roshanthapamagarmagar:xllaJ4rVljwx1Tni@cluster0.crqpre8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
